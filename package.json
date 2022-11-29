@@ -1,0 +1,29 @@
+{
+  "name": "les-petits-plats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./public/css/style.css --style expanded",
+    "prefix": "postcss ./public/css/style.css --use autoprefixer -d ./public/css/prefixed/ --watch",
+    "dev": "concurrently --kill-others \"npm run sass\" \"npm run prefix\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/S-Syrichko/Les-petits-plats.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "browserslist": "last 4 versions",
+  "bugs": {
+    "url": "https://github.com/S-Syrichko/Les-petits-plats/issues"
+  },
+  "homepage": "https://github.com/S-Syrichko/Les-petits-plats#readme",
+  "dependencies": {
+    "bootstrap": "^5.2.2",
+    "sass": "^1.55.0"
+  },
+  "devDependencies": {
+    "concurrently": "^7.4.0"
+  }
+}
