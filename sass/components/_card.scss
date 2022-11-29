@@ -1,0 +1,27 @@
+.card {
+  height: 350px;
+  &__body{
+    height: 190px;
+  }
+  &__banner {
+    padding: 20px; 
+    h2 {
+      width: 60%;
+    }
+    .card__time-container{
+      width: 25%;
+    }
+  }
+  &__description {
+    padding: 0 20px 20px 20px;
+    height: 150px;
+  }
+  &__instructions {
+    padding-bottom: 10px;
+    &__content{
+      font-family: 'Roboto', 'sans-serif';
+      height: 70px;
+      overflow: hidden;
+    }
+  }
+}
