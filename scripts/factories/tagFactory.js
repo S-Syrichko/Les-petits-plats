@@ -4,9 +4,10 @@ import {
   removeElementFromArray,
 } from "../utils/functions.js";
 import { searchLists, displayAllRecipes } from "../pages/index.js";
-import { filterRecipesByTag } from "../components/searchEngine.js";
+import { filterRecipesByTag, searchInput } from "../components/searchEngine.js";
 
 const tagsContainer = document.querySelector(".tags-container");
+const searchInputField = document.getElementById("search-input");
 
 export function tagFactory(type, content) {
   const filterType = type;
@@ -73,6 +74,7 @@ export function tagFactory(type, content) {
       );
       if (!searchLists.selected.length) {
         displayAllRecipes();
+        searchInputField.value = "";
       }
     }
   }

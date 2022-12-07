@@ -151,6 +151,7 @@ export function recipeFactory(data) {
       removeRecipeFromTags();
     }
   }
+  
   function addRecipeToTags() {
     addIngredients();
     addAppliances();
@@ -195,7 +196,6 @@ export function recipeFactory(data) {
     removeUstensils();
     displayTagLists();
   }
-
   function removeIngredients() {
     ingredients.forEach((ingredient) => {
       let deleteIngredient = true;

@@ -80,7 +80,6 @@ export function displayAllRecipes() {
   });
   setFilteredRecipesList(recipesList);
 }
-
 export function displayTagLists(advancedSearch = false) {
   displayIngredientTags(advancedSearch);
   displayApplianceTags(advancedSearch);
@@ -113,7 +112,6 @@ export function displayApplianceTags(advancedSearch) {
     });
   }
 }
-
 export function displayUstensilTags(advancedSearch) {
   const arrayToDisplay = advancedSearch
     ? searchLists.ustensils.advancedSearch

@@ -9,54 +9,53 @@ const searchInputField = document.getElementById("search-input");
 const noRecipeText = document.querySelector(".norecipe-text");
 
 const threeInputText = /[A-Za-zÀ-ú]{3,}/;
-export let inputValue;
 let recipeFitSearch = false;
+export let searchInput;
 let searchResults = [];
 
 searchInputField.onkeyup = (e) => {
   e.preventDefault();
   searchResults = [];
+  searchInput = searchInputField.value.toLowerCase();
   filterRecipesByInput(searchInputField.value.toLowerCase());
 };
 
 function filterRecipesByInput(value) {
-  inputValue = value;
-  if (threeInputText.test(inputValue)) {
-    searchInputInRecipes();
+  if (threeInputText.test(value)) {
+    searchInputInRecipes(value);
     setFilteredRecipesList(searchResults);
-  } else if (!inputValue && !searchLists.selected.length) {
+  } else if (!searchInput && !searchLists.selected.length) {
     displayAllRecipes();
   }
 }
 
 export function filterRecipesByTag(value, type) {
-  inputValue = value;
   searchResults = [];
-  searchInputInRecipes(type);
+  searchInputInRecipes(value, type);
   setFilteredRecipesList(searchResults);
 }
 
-async function searchInputInRecipes(type = "all") {
+async function searchInputInRecipes(value, type = "all") {
   let searchSuccess = false;
   for (const recipe of filteredRecipesList) {
     recipeFitSearch = false;
     switch (type) {
       case "all":
         const concurrentSearches = [
-          isInputInName(recipe),
-          isInputInDescription(recipe),
-          isInputInIngredients(recipe),
+          isInputInName(recipe, value),
+          isInputInDescription(recipe, value),
+          isInputInIngredients(recipe, value),
         ];
         await Promise.all(concurrentSearches);
         break;
       case "ingredient":
-        await isInputInIngredients(recipe);
+        await isInputInIngredients(recipe, value);
         break;
       case "appliance":
-        await isTagInAppliances(recipe);
+        await isTagInAppliances(recipe, value);
         break;
       case "utensil":
-        await isTagInUstensils(recipe);
+        await isTagInUstensils(recipe, value);
         break;
       default:
         console.log("Unexpected type value for tag" + type);
@@ -78,32 +77,32 @@ async function searchInputInRecipes(type = "all") {
   }
 }
 
-async function isInputInName(recipe) {
-  if (recipe.name.toLowerCase().includes(inputValue)) {
+async function isInputInName(recipe, value) {
+  if (recipe.name.toLowerCase().includes(value)) {
     recipeFitSearch = true;
   }
 }
-async function isInputInDescription(recipe) {
-  if (recipe.description.toLowerCase().includes(inputValue)) {
+async function isInputInDescription(recipe, value) {
+  if (recipe.description.toLowerCase().includes(value)) {
     recipeFitSearch = true;
   }
 }
-async function isInputInIngredients(recipe) {
+async function isInputInIngredients(recipe, value) {
   for (let item of recipe.ingredients) {
-    if (item.ingredient.toLowerCase().includes(inputValue)) {
+    if (item.ingredient.toLowerCase().includes(value)) {
       recipeFitSearch = true;
       return;
     }
   }
 }
-async function isTagInAppliances(recipe) {
-  if (recipe.appliance.toLowerCase().includes(inputValue)) {
+async function isTagInAppliances(recipe, value) {
+  if (recipe.appliance.toLowerCase().includes(value)) {
     recipeFitSearch = true;
   }
 }
-async function isTagInUstensils(recipe) {
+async function isTagInUstensils(recipe, value) {
   for (let utensil of recipe.ustensils) {
-    if (utensil.toLowerCase().includes(inputValue)) {
+    if (utensil.toLowerCase().includes(value)) {
       recipeFitSearch = true;
     }
   }

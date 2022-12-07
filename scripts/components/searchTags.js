@@ -53,5 +53,4 @@ function filterTagsByInput(value, type) {
       displayUstensilTags(true);
       break;
   }
-  //displayTagLists(true);
 }
